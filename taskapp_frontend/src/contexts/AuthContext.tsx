@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (username: string, password: string) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL || '/api'}/auth/login`,
+      `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/login`,
       {
         method: 'POST',
         headers: {
@@ -91,14 +91,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      token, 
-      loading, 
-      login, 
-      signup, 
-      logout, 
-      isAuthenticated: !!token 
+    <AuthContext.Provider value={{
+      user,
+      token,
+      loading,
+      login,
+      signup,
+      logout,
+      isAuthenticated: !!token
     }}>
       {children}
     </AuthContext.Provider>
