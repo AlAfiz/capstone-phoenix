@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/alafiz/taskapp-backend:latest
+          imagePullPolicy: Always
+          env:
+            - name: DATABASE_URL
+              # This points to the exact service name and credentials from your postgres.yaml
+              value: postgresql://taskapp_user:taskapp_password@postgres:5432/taskapp
+            - name: SECRET_KEY
+              value: phoenix-capstone-secret
+            - name: PORT
+              value: "5000"
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
