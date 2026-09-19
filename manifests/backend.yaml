@@ -19,11 +19,18 @@ spec:
           image: ghcr.io/alafiz/taskapp-backend:latest
           imagePullPolicy: Always
           env:
-            - name: DATABASE_URL
-              # This points to the exact service name and credentials from your postgres.yaml
-              value: postgresql://taskapp_user:taskapp_password@postgres:5432/taskapp
+            - name: DATABASE_HOST
+              value: "postgres"
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: "taskapp"
+            - name: DATABASE_USER
+              value: "taskapp_user"
+            - name: DATABASE_PASSWORD
+              value: "taskapp_password"
             - name: SECRET_KEY
-              value: phoenix-capstone-secret
+              value: "phoenix-capstone-secret"
             - name: PORT
               value: "5000"
           ports:
