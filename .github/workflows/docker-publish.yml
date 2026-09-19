@@ -43,3 +43,5 @@ jobs:
           context: ./taskapp_frontend
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/taskapp-frontend:latest
+          build-args: |
+            VITE_API_URL=http://localhost:5000/api
